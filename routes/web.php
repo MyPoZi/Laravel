@@ -23,3 +23,6 @@ Route::post('auth/register', 'Auth\RegisterController@register');
 Route::get('auth/login', 'Auth\LoginController@showLoginForm');
 Route::post('auth/login', 'Auth\LoginController@login');
 Route::get('auth/logout', 'Auth\LoginController@logout');
+
+Route::get('auth/login/github', 'Auth\SocialController@getGithubAuth');
+Route::get('auth/login/github/callback', 'Auth\SocialController@getGithubAuthCallback');

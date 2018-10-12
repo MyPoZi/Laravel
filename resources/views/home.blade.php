@@ -10,6 +10,7 @@
 @else
     ゲストさん<br/>
     <a href="/auth/login">ログイン</a>
+    <a href="/auth/login/github/" class="btn btn-github">Sign in using Github</a>
     <a href="/auth/register">会員登録</a>
 @endif
 </body>
