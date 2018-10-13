@@ -27,4 +27,5 @@ Route::get('auth/logout', 'Auth\LoginController@logout');
 Route::get('auth/login/github', 'Auth\SocialController@getGithubAuth');
 Route::get('auth/login/github/callback', 'Auth\SocialController@getGithubAuthCallback');
 
-Route::get('gists', 'GistController@publicList');
+Route::get('gists', 'GistController@showPublicList');
+Route::get('gists/my-gists', 'GistController@showMyGistsList');
