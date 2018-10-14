@@ -29,3 +29,8 @@ Route::get('auth/login/github/callback', 'Auth\SocialController@getGithubAuthCal
 
 Route::get('gists', 'GistController@showPublicList');
 Route::get('gists/my-gists', 'GistController@showMyGistsList');
+
+Route::get('gists/send', function (){
+    return view('gists/gists-post');
+});
+Route::post('gists', 'GistController@postGists');

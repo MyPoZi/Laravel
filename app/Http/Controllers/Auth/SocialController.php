@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -8,13 +9,14 @@ use Laravel\Socialite\Facades\Socialite;
 
 use App\User;
 use App\SocialAccount;
+
 class SocialController extends Controller
 {
     protected $redirectTo = '/gists';
 
     public function getGithubAuth()
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver('github')->with(['scope' => 'gist'])->redirect();
     }
 
     public function getGithubAuthCallback()
@@ -32,13 +34,12 @@ class SocialController extends Controller
     {
         $account = SocialAccount::firstOrCreate([
             'provider_user_id' => $providerUser->getId(),
-            'provider'         => $provider,
+            'provider' => $provider,
         ]);
 
-        if (empty($account->user))
-        {
+        if (empty($account->user)) {
             $user = User::create([
-                'name'   => $providerUser->getNickname(),
+                'name' => $providerUser->getNickname(),
                 'email' => $providerUser->getEmail(),
             ]);
             $account->user()->associate($user);
