@@ -5,10 +5,10 @@
 
         @for($i = 0; $i < count($name); $i++)
             <div class="shadow m-3 p-3 border bg-light">
-                <p>{{$name[$i]}}</p>
-                <a href="{{$owner_html_url[$i]}}"><img class="rounded-circle" style="width: 70px; height: 70px" src="{{$img[$i]}}"></a>
+                <p>アカウント名：{{$name[$i]}}</p>
+                <a href="{{$owner_html_url[$i]}}"><img class="rounded-circle" style="width: 70px; height: 70px" src="{{$img[$i]}}" alt="avatar"></a>
                 <a href="{{$html_url[$i]}}"><p>{{key($files[$i])}}</p></a>
-                <p>Description:{{$description[$i]}}</p>
+                <p>Gistの説明：{{$description[$i]}}</p>
                 <p>{{$updated_at[$i]}}</p>
             </div>
         @endfor

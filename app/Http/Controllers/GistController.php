@@ -16,59 +16,46 @@ class GistController extends Controller
 
     public function showPublicList()
     {
-        $show_public_list = $this->getGistsDate('https://api.github.com/gists');
+        $show_public_list = $this->getGistsDate('https://api.github.com/gists/public');
         return $show_public_list;
     }
 
     public function postGists(Request $request)
     {
-//        var_dump($request);
-//        $post_gists = $this->postGistsData('https://api.github.com/gists');
-        $all = $request->all();
-//        $text_area = $request->''
-//        var_dump($all['description']);
-        echo $all['description'];
-        echo $all['file_name'];
-        echo $all['TextArea1'];
-        echo $all['public'];
-//        var_dump($all);
-        return ;
+        $post_gists = $this->postGistsData('https://api.github.com/gists', $request);
+
+        return var_dump($post_gists);
     }
 
     public function showMyGistsList()
     {
-        $show_my_gists_list = $this->getGistsDate('https://api.github.com/users/' .
-            mb_strtolower(Auth::user()->name) . '/gists');
+        $show_my_gists_list = $this->getGistsDate('https://api.github.com/gists');
         return $show_my_gists_list;
     }
 
 
-    public function postGistsData(string $url)
+    public function postGistsData(string $url, Request $request)
     {
-
+        $all = $request->all();
         $access_token = $this->getAccessToken();
-
-
-//        $array = array(
-//            "description" => "Hello World Examples",
-//            "public" => true,
-//            "files" => array(
-//                "hello_world.rb" => array(
-//                    "content" => "ooooo",
-//                ),
-//                "hello_world.py" => array(
-//                    "content" => "tetetetes"
-//                )
-//            ),
-//        );
-//        $array = json_encode($array);
-//        $client = new Client();
-//        $res = $client->request('POST', $url,
-//            [
-//                'query' => ['access_token' => $access_token],
-//                'body' => $array
-//            ]);
-        return /*var_dump($all)*/;
+        
+        $array = array(
+            "description" => $all['description'],
+            "public" => boolval($all['public']),
+            "files" => array(
+                $all['file_name'] => array(
+                    "content" => $all['TextArea1'],
+                ),
+            ),
+        );
+        $array = json_encode($array);
+        $client = new Client();
+        $res = $client->request('POST', $url,
+            [
+                'query' => ['access_token' => $access_token],
+                'body' => $array
+            ]);
+        return $res;
     }
 
     public function getGistsDate(string $url)

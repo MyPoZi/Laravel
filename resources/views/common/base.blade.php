@@ -20,7 +20,7 @@
                 <a class="nav-link" href="/home">ホーム</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/gists">Gist</a>
+                <a class="nav-link" href="/gists">公開されているGist</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/gists/my-gists">自分のGist</a>

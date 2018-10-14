@@ -12,8 +12,8 @@
         <div class="form-group">
             <label for="Select1">公開設定</label>
             <select class="form-control" name="public" id="Select">
-                <option value="true">公開</option>
-                <option value="false">秘密</option>
+                <option value="1">公開</option>
+                <option value="0">秘密</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary float-right" >送信</button>
