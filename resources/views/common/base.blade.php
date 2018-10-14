@@ -10,20 +10,23 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Gists App</a>
+    <a class="navbar-brand" href="#">Gistsアプリ</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/home">Home</a>
+                <a class="nav-link" href="/home">ホーム</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/gists">Gists</a>
+                <a class="nav-link" href="/gists">Gist</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/gists/my-gists">Mygists</a>
+                <a class="nav-link" href="/gists/my-gists">自分のGist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/gists/send">Gistを作る</a>
             </li>
         </ul>
     </div>

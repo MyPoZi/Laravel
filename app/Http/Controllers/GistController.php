@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\SocialAccount;
 use function GuzzleHttp\Psr7\str;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -18,10 +20,19 @@ class GistController extends Controller
         return $show_public_list;
     }
 
-    public function postGists()
+    public function postGists(Request $request)
     {
-        $post_gists = $this->postGistsData('https://api.github.com/gists');
-        return $post_gists;
+//        var_dump($request);
+//        $post_gists = $this->postGistsData('https://api.github.com/gists');
+        $all = $request->all();
+//        $text_area = $request->''
+//        var_dump($all['description']);
+        echo $all['description'];
+        echo $all['file_name'];
+        echo $all['TextArea1'];
+        echo $all['public'];
+//        var_dump($all);
+        return ;
     }
 
     public function showMyGistsList()
@@ -37,26 +48,27 @@ class GistController extends Controller
 
         $access_token = $this->getAccessToken();
 
-        $array = array(
-            "description" => "Hello World Examples",
-            "public" => true,
-            "files" => array(
-                "hello_world.rb" => array(
-                    "content" => "ooooo",
-                ),
-                "hello_world.py" => array(
-                    "content" => "tetetetes"
-                )
-            ),
-        );
-        $array = json_encode($array);
-        $client = new Client();
-        $res = $client->request('POST', $url,
-            [
-                'query' => ['access_token' => $access_token],
-                'body' => $array
-            ]);
-        return var_dump($res);
+
+//        $array = array(
+//            "description" => "Hello World Examples",
+//            "public" => true,
+//            "files" => array(
+//                "hello_world.rb" => array(
+//                    "content" => "ooooo",
+//                ),
+//                "hello_world.py" => array(
+//                    "content" => "tetetetes"
+//                )
+//            ),
+//        );
+//        $array = json_encode($array);
+//        $client = new Client();
+//        $res = $client->request('POST', $url,
+//            [
+//                'query' => ['access_token' => $access_token],
+//                'body' => $array
+//            ]);
+        return /*var_dump($all)*/;
     }
 
     public function getGistsDate(string $url)
