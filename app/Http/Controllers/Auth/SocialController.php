@@ -17,31 +17,29 @@ class SocialController extends Controller
 
     public function getGithubAuth()
     {
-        return Socialite::driver('github')->with(['scope' => 'gist', 'read:user'])->redirect();
+        return Socialite::driver('github')->with(['scope' => 'gist'])->redirect();
     }
 
     public function getGithubAuthCallback()
     {
         $githubUser = Socialite::driver('github')->user();
 
-        $user = $this->createOrGetUser($githubUser, 'github');
+        $user = $this->createOrGetUser($githubUser);
         Auth::login($user, true);
 
         return redirect($this->redirectTo);
     }
 
 
-    public function createOrGetUser($providerUser, $provider)
+    public function createOrGetUser($providerUser)
     {
         $account = SocialAccount::firstOrCreate([
             'provider_user_id' => $providerUser->getId(),
-            'provider' => $provider,
         ]);
 
         if (empty($account->user)) {
             $user = User::create([
                 'name' => $providerUser->getNickname(),
-
             ]);
             $account->user()->associate($user);
         }

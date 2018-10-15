@@ -79,11 +79,9 @@ class GistsController extends Controller
             array_push($files, $record['files']);
             array_push($img, $record['owner']['avatar_url']);
             array_push($owner_html_url, $record['owner']['html_url']);
-            array_push($updated_at, $record['updated_at']);
+            array_push($updated_at, date('Y/m/d H:i:s', strtotime($record['updated_at']) + 9 * 60 * 60));
             array_push($description, $record['description']);
         }
-        $res = $client->request('GET', 'https://avatars.githubusercontent.com/' . Auth::user()->name);
-        var_dump($res);
         return view('gists/gists', compact('name', 'html_url', 'files',
             'img', 'owner_html_url', 'updated_at', 'description'));
     }
