@@ -27,10 +27,10 @@ Route::get('auth/logout', 'Auth\LoginController@logout');
 Route::get('auth/login/github', 'Auth\SocialController@getGithubAuth');
 Route::get('auth/login/github/callback', 'Auth\SocialController@getGithubAuthCallback');
 
-Route::get('gists', 'GistController@showPublicList');
-Route::get('gists/my-gists', 'GistController@showMyGistsList');
+Route::get('gists', 'GistsController@showPublicList');
+Route::get('gists/my-gists', 'GistsController@showMyGistsList');
 
 Route::get('gists/send', function (){
-    return view('gists/gists-post');
+    return view('gists/gists_post');
 });
-Route::post('gists', 'GistController@postGists');
+Route::post('gists', 'GistsController@postGists');

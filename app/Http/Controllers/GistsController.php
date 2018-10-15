@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\SocialAccount;
-use function GuzzleHttp\Psr7\str;
-//use Illuminate\Http\Request;
-
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class GistController extends Controller
+class GistsController extends Controller
 {
 
     public function showPublicList()
@@ -23,7 +19,6 @@ class GistController extends Controller
     public function postGists(Request $request)
     {
         $post_gists = $this->postGistsData('https://api.github.com/gists', $request);
-
         return var_dump($post_gists);
     }
 
@@ -38,7 +33,7 @@ class GistController extends Controller
     {
         $all = $request->all();
         $access_token = $this->getAccessToken();
-        
+
         $array = array(
             "description" => $all['description'],
             "public" => boolval($all['public']),
@@ -69,6 +64,7 @@ class GistController extends Controller
                 'access_token' => $access_token
             ]
         ]);
+
         $data = json_decode($res->getBody(), true);
         $name = array();
         $html_url = array();
@@ -86,6 +82,8 @@ class GistController extends Controller
             array_push($updated_at, $record['updated_at']);
             array_push($description, $record['description']);
         }
+        $res = $client->request('GET', 'https://avatars.githubusercontent.com/' . Auth::user()->name);
+        var_dump($res);
         return view('gists/gists', compact('name', 'html_url', 'files',
             'img', 'owner_html_url', 'updated_at', 'description'));
     }

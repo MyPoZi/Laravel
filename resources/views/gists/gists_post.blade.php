@@ -1,7 +1,9 @@
 @extends('common.base')
-
+@section('title')
+    title sub
+@endsection
 @section('body')
-    <form action="/gists" method="post" accept-charset="utf-8">
+    <form action="/gists" method="post">
         {{ csrf_field() }}
         <input type="text" name="description" class="form-control form-control" placeholder="Gistの説明">
         <br>

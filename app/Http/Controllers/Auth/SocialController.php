@@ -17,7 +17,7 @@ class SocialController extends Controller
 
     public function getGithubAuth()
     {
-        return Socialite::driver('github')->with(['scope' => 'gist'])->redirect();
+        return Socialite::driver('github')->with(['scope' => 'gist', 'read:user'])->redirect();
     }
 
     public function getGithubAuthCallback()
@@ -41,7 +41,7 @@ class SocialController extends Controller
         if (empty($account->user)) {
             $user = User::create([
                 'name' => $providerUser->getNickname(),
-                'email' => $providerUser->getEmail(),
+
             ]);
             $account->user()->associate($user);
         }

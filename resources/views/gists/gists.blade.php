@@ -1,5 +1,7 @@
 @extends('common.base')
-
+@section('title')
+    title sub
+@endsection
 @section('body')
     <div class="border alert alert-secondary">
 
