@@ -18,8 +18,9 @@ class GistsController extends Controller
 
     public function postGists(Request $request)
     {
-        $post_gists = $this->postGistsData('https://api.github.com/gists', $request);
-        return var_dump($post_gists);
+        $this->postGistsData('https://api.github.com/gists', $request);
+        $show_my_gists_list = $this->showMyGistsList();
+        return $show_my_gists_list;
     }
 
     public function showMyGistsList()
@@ -34,12 +35,26 @@ class GistsController extends Controller
         $all = $request->all();
         $access_token = $this->getAccessToken();
 
+        if (!$all['description']) {
+            $all['description'] = "";
+        }
+//        $files = array();
+//        if (count($all['file_name']) != 1) {
+//            foreach (array_map($all['file_name'], $all['text_area']) as [$file_name, $text_area]) {
+//                array_merge($files, array($file_name => array(
+//                        "content" => $text_area,
+//                    ))
+//                );
+//            }
+//        }
+//        var_dump($files);
+
         $array = array(
             "description" => $all['description'],
             "public" => boolval($all['public']),
             "files" => array(
                 $all['file_name'] => array(
-                    "content" => $all['TextArea1'],
+                    "content" => $all['text_area'],
                 ),
             ),
         );
